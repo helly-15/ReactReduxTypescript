@@ -1,24 +1,19 @@
 import React, {useState} from "react";
 import {data} from '../data/data';
 import {IPostsInterface} from './postsInterface';
+import {PostText} from './PostText';
 export const Posts:React.FC<IPostsInterface> = (props)=> {
-    const {signedUser} = props;
+    const {signedUser, signedUserID} = props;
     const [showAllPosts, setShowAllPosts] = useState<boolean>(true);
 
 
     const postElements = data.posts.byId.map((post)=>{
         let userSubscriptions = data.users.byId.filter(user=>user.name === signedUser)[0].subscriptions;
         if (showAllPosts){
-            return <div className='posts-post card'>
-                <h3 className='card-title text-left'> {post.author}</h3>
-                <h4 className='card-text text-left'> {post.body}</h4>
-            </div>
+            return <PostText post ={post} signedUserID={signedUserID}/>
         }
         else if (userSubscriptions.includes(post.author)){
-            return <div className='posts-post card'>
-                <h3 className='card-title text-left'> {post.author}</h3>
-                <h4 className='card-text text-left'> {post.body}</h4>
-            </div>
+            return <PostText post ={post} signedUserID={signedUserID}/>
         }
 
     })

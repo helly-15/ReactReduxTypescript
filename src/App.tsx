@@ -38,7 +38,7 @@ function App() {
             break;
         case true:
             return (
-                <Posts signedUser={signedUser}/>
+                <Posts signedUser={signedUser} signedUserID ={signedUserID}/>
                 )
             break;
     }

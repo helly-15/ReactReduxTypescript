@@ -1,4 +1,4 @@
-export interface DataInterface{
+export interface IDataInterface{
     posts : {
         byId :
              {

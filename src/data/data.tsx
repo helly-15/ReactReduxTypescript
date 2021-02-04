@@ -1,5 +1,5 @@
-
-export const data = {
+import {IDataInterface} from './dataInterface'
+export const data :IDataInterface = {
     posts: {
         byId: [
             {
