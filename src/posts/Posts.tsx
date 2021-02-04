@@ -1,7 +1,6 @@
 import React from "react";
 import {data} from '../data/data';
 import {IPostsInterface} from './postsInterface';
-import {subscriptionList} from '../subscriptionList'
 export const Posts:React.FC<IPostsInterface> = (props)=> {
     const {signedUser} = props;
 
@@ -11,7 +10,6 @@ export const Posts:React.FC<IPostsInterface> = (props)=> {
             <h4> {post.body}</h4>
         </div>
     })
-
 
     return (
         <div className='posts'>
