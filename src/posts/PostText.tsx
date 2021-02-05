@@ -4,11 +4,10 @@ import {useState} from "react";
 
 export const PostText: React.FC<IPostTextInterface> = (props) => {
     const {post, signedUserID} = props;
-    // const [likedBy, setLikedBy] = useState<number>(0);
     const [liked, setLiked] = useState<boolean>(false);
     return (
         <div className='posts-post card'>
-            <h3 className='card-title text-left'> {post.author}</h3>
+            <h3 className='card-title text-left'> {data.users.byId.find(user=>user.username===post.author)?.name}</h3>
             <h4 className='card-text text-left'> {post.body}</h4>
             <span> Liked by:
                 {
@@ -43,5 +42,4 @@ function onLike(post: {
         }
 
     }
-    console.log(post)
 }

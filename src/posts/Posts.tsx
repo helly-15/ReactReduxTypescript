@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {data} from '../data/data';
 import {IPostsInterface} from './postsInterface';
 import {PostText} from './PostText';
+import {Link} from "react-router-dom";
 export const Posts:React.FC<IPostsInterface> = (props)=> {
     const {signedUser, signedUserID} = props;
     const [showAllPosts, setShowAllPosts] = useState<boolean>(true);
@@ -28,9 +29,9 @@ export const Posts:React.FC<IPostsInterface> = (props)=> {
                 Subscriptions
             </button>
             {postElements}
-            <button className="btn btn-outline-info">
+            <Link to = "/profile">
                 To profile
-            </button>
+            </Link>
         </div>
     );
 }

@@ -4,6 +4,13 @@ import {Signup} from "./signup/Signup";
 import {Posts} from './posts/Posts';
 import {data} from './data/data'
 import {User} from "./user/User";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from 'react-router-dom';
+import { Profile } from './profile/Profile';
 
 function App() {
     const [signed, setSigned] = useState<boolean>(false);
@@ -38,7 +45,22 @@ function App() {
             break;
         case true:
             return (
-                <Posts signedUser={signedUser} signedUserID ={signedUserID}/>
+                <Router>
+                    <div>
+                        {/*<Posts signedUser={signedUser} signedUserID ={signedUserID}/>*/}
+
+                        <Switch>
+                            <Route path="/profile">
+                                <Profile name={signedUser} signedUserID ={signedUserID} signedUser={signedUser}/>
+                            </Route>
+                            <Route path="/">
+                                <Posts signedUser={signedUser} signedUserID ={signedUserID} />
+                            </Route>
+                        </Switch>
+                    </div>
+
+                </Router>
+
                 )
             break;
     }
