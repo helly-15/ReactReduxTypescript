@@ -47,8 +47,6 @@ function App() {
             return (
                 <Router>
                     <div>
-                        {/*<Posts signedUser={signedUser} signedUserID ={signedUserID}/>*/}
-
                         <Switch>
                             <Route path="/profile">
                                 <Profile name={signedUser} signedUserID ={signedUserID} signedUser={signedUser}/>
