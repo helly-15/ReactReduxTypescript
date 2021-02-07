@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import {Profile} from "../profile/Profile";
 
 export const Posts: React.FC<IPostsInterface> = (props) => {
-    const {signedUser, signedUserID, nameOfUserProfile, showUserProfile} = props;
+    const {signedUser, signedUserID, nameOfUserProfile, showUserProfile, unsign} = props;
     const [showAllPosts, setShowAllPosts] = useState<boolean>(true);
     const postElements = data.posts.byId.map((post) => {
         let userSubscriptions = data.users.byId.filter(user => user.name === signedUser)[0].subscriptions;
@@ -38,7 +38,7 @@ export const Posts: React.FC<IPostsInterface> = (props) => {
         case false:
             return (
                 <Profile signedUser={signedUser} nameOfUserProfile2={nameOfUserProfile}
-                         showUserProfile={showUserProfile}/>
+                         showUserProfile={showUserProfile} unsign={unsign}/>
             )
 
     }

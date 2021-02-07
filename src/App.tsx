@@ -53,11 +53,11 @@ function App() {
                         <Switch>
                             <Route path="/" exact>
                                 <Posts signedUser={signedUser} signedUserID={signedUserID}
-                                       nameOfUserProfile={nameOfUserProfile} showUserProfile={showUserProfile}/>
+                                       nameOfUserProfile={nameOfUserProfile} showUserProfile={showUserProfile} unsign = {setSigned} />
                             </Route>
                             <Route path="/profile">
                                 <Profile signedUser={signedUser} nameOfUserProfile2={nameOfUserProfile}
-                                         showUserProfile={showUserProfile}/>
+                                         showUserProfile={showUserProfile} unsign = {setSigned}/>
                             </Route>
 
                         </Switch>

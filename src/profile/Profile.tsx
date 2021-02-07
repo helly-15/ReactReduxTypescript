@@ -8,7 +8,7 @@ import {SubscriptionList} from "../subscriptions/SubscriptionList";
 import {getIdByName} from "../utils/getIdByName";
 
 export const Profile: React.FC<IProfileInterface> = (props) => {
-    let {signedUser, nameOfUserProfile2, showUserProfile} = props;
+    let {signedUser, nameOfUserProfile2, showUserProfile, unsign} = props;
     const [subscriptions, setSubscriptions] = useState<string[]>([]);
     const signedUserID: string = getIdByName(signedUser, data);
     const userPosts = data.posts.byId.filter(post => post.author === signedUserID);
@@ -55,6 +55,11 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
     } else
         return (
             <div className='posts card-body text-center col-sm-3'>
+                {signedUser === nameOfUserProfile2 &&
+                <button className="btn btn-outline-danger" onClick={() => unsign(false)}>
+                    Sign out
+                </button>
+                }
                 <p className="card-text card-header"> {nameOfUserProfile2}</p>
                 <p className="card-text card-header"
                    onClick={() => onShowSubscriptions(subscribers(nameOfUserProfile2))}> Subscribers: {subscribers(nameOfUserProfile2).length}</p>
@@ -63,15 +68,11 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
                     to: {data.users.byId.find(user => user.name === nameOfUserProfile2)?.subscriptions.length}</p>
                 {console.log(data.users.byId.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(nameOfUserProfile2, data)))}
                 {signedUser !== nameOfUserProfile2 && !data.users.byId.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(nameOfUserProfile2, data)) &&
-                <button className="btn btn-outline-primary" onClick={() => subscribe(nameOfUserProfile2)}>
+                <button className="btn btn-outline-success" onClick={() => subscribe(nameOfUserProfile2)}>
                     Subscribe
                 </button>
                 }
-                {signedUser !== nameOfUserProfile2 && data.users.byId.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(nameOfUserProfile2, data)) &&
-                <button className="btn btn-outline-primary" onClick={() => unSubscribe(nameOfUserProfile2)}>
-                    Unsubscribe
-                </button>
-                }
+
                 {console.log(data.users.byId.find(user => user.name === signedUser)?.subscriptions)}
                 <p className="card-text card-header"> Posts </p>
                 {postElements}
