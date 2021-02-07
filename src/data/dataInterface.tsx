@@ -1,22 +1,22 @@
-export interface IDataInterface{
-    posts : {
-        byId :
-             {
-                id : string,
-                author : string,
-                body : string,
-                likes : string[]
-            }[],
-        allIds : string[]
-    },
-    users : {
-        byId :
+export interface IDataInterface {
+    posts: {
+        byId:
             {
-                username : string,
-                name : string,
+                id: string,
+                author: string,
+                body: string,
+                likes: string[]
+            }[],
+        allIds: string[]
+    },
+    users: {
+        byId:
+            {
+                username: string,
+                name: string,
                 subscriptions: string[]
             }[],
 
-        allIds : string[]
+        allIds: string[]
     }
 }

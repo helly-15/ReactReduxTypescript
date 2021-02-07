@@ -1,5 +1,4 @@
-
-export interface ISubscriptionListInterface{
-   subscriptions:string[],
-   onClose:(() => void) | undefined
+export interface ISubscriptionListInterface {
+    subscriptions: string[],
+    onClose: (() => void) | undefined
 }

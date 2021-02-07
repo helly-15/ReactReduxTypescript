@@ -1,5 +1,6 @@
 import {IDataInterface} from './dataInterface'
-export const data :IDataInterface = {
+
+export const data: IDataInterface = {
     posts: {
         byId: [
             {
@@ -24,12 +25,12 @@ export const data :IDataInterface = {
                 name: "Masha",
                 subscriptions: ["user2"]
             },
-             {
+            {
                 username: "user2",
                 name: "Misha",
                 subscriptions: ["user1", "user3"]
             },
-             {
+            {
                 username: "user3",
                 name: "Arisha",
                 subscriptions: ["user1"]
