@@ -1,7 +1,10 @@
 
 export interface IPostsInterface{
    signedUser:string,
-   signedUserID :string
+   signedUserID :string,
+   nameOfUserProfile :string,
+   showUserProfile (name:string):void,
+
 }
 
 export interface IPostTextInterface{
@@ -11,6 +14,7 @@ export interface IPostTextInterface{
    body: string,
    likes: string[] },
 
-   signedUserID :string
+   signedUserID :string,
+   showUserProfile (name:string):void,
 }
 

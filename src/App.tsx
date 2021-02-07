@@ -16,6 +16,7 @@ function App() {
     const [signed, setSigned] = useState<boolean>(false);
     const [signedUser, setSignedUser] = useState<string>('');
     const [signedUserID, setSignedUserID] = useState<string>('');
+    const [nameOfUserProfile, setNameOfUserProfile] = useState<string>('');
     const onSignUp =()=>{
         setSigned(true);
         let isExistent = data.users.byId.filter((user) => user.name === signedUser)
@@ -36,6 +37,9 @@ function App() {
     const onUserEnter = (event:React.ChangeEvent<HTMLInputElement>) => {
         setSignedUser(event.target.value);
     }
+    const showUserProfile = (name:string)=>{
+        setNameOfUserProfile(name)
+    }
 
     switch (signed) {
         case false:
@@ -48,12 +52,13 @@ function App() {
                 <Router>
                     <div>
                         <Switch>
+                            <Route path="/" exact>
+                                <Posts signedUser={signedUser} signedUserID ={signedUserID} nameOfUserProfile ={nameOfUserProfile} showUserProfile = {showUserProfile}/>
+                            </Route>
                             <Route path="/profile">
-                                <Profile name={signedUser} signedUserID ={signedUserID} signedUser={signedUser}/>
+                                <Profile signedUser={signedUser} nameOfUserProfile2={nameOfUserProfile} showUserProfile = {showUserProfile}/>
                             </Route>
-                            <Route path="/">
-                                <Posts signedUser={signedUser} signedUserID ={signedUserID} />
-                            </Route>
+
                         </Switch>
                     </div>
 

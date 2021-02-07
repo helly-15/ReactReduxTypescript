@@ -1,6 +1,6 @@
 
 export interface IProfileInterface{
     signedUser:string,
-    signedUserID :string,
-    name:string
+    nameOfUserProfile2 :string,
+    showUserProfile (name:string):void,
 }
