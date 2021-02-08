@@ -15,7 +15,7 @@ export const PostText: React.FC<IPostTextInterface> = (props) => {
                     post.likes.map(userLike => {
                         let userLikeName = data.users.byId.find(user => user.username === userLike)!.name
                         return <a href='#' onClick={() => showUserProfile(userLikeName)}> {userLikeName} </a>
-                    })
+                    }).reverse()
                 }
             </span>
             <a href='#' onClick={() => {

@@ -6,14 +6,16 @@ import {Link} from "react-router-dom";
 import {PostText} from "../posts/PostText";
 import {SubscriptionList} from "../subscriptions/SubscriptionList";
 import {getIdByName} from "../utils/getIdByName";
+import {NewPost} from "./NewPost";
 
 export const Profile: React.FC<IProfileInterface> = (props) => {
-    let {signedUser, nameOfUserProfile2, showUserProfile, unsign} = props;
+    let {signedUser, userOfProfile, showUserProfile, unsign} = props;
     const [subscriptions, setSubscriptions] = useState<string[]>([]);
+    const [openPostEditor, setOpenTestEditor] = useState<boolean>(false);
     const signedUserID: string = getIdByName(signedUser, data);
     const userPosts = data.posts.byId.filter(post => post.author === signedUserID);
-    if (nameOfUserProfile2 === '') {
-        nameOfUserProfile2 = signedUser
+    if (userOfProfile === '') {
+        userOfProfile = signedUser
     }
     const postElements = userPosts.map(post =>
         <PostText post={post} signedUserID={signedUserID} showUserProfile={showUserProfile}/>
@@ -50,38 +52,49 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
         setSubscriptions([])
     }
 
+
     if (subscriptions.length > 0) {
         return <SubscriptionList subscriptions={subscriptions} onClose={onClose}/>
+    } else if (openPostEditor) {
+        return (
+            <NewPost signedUserID={signedUserID} setOpenTestEditor={setOpenTestEditor}/>
+        )
     } else
         return (
             <div className='posts card-body text-center col-sm-3'>
-                {signedUser === nameOfUserProfile2 &&
+                {signedUser === userOfProfile &&
                 <button className="btn btn-outline-danger" onClick={() => unsign(false)}>
                     Sign out
                 </button>
+
                 }
-                <p className="card-text card-header"> {nameOfUserProfile2}</p>
+                <p className="card-text card-header"> {userOfProfile}</p>
                 <p className="card-text card-header"
-                   onClick={() => onShowSubscriptions(subscribers(nameOfUserProfile2))}> Subscribers: {subscribers(nameOfUserProfile2).length}</p>
+                   onClick={() => onShowSubscriptions(subscribers(userOfProfile))}> Subscribers: {subscribers(userOfProfile).length}</p>
                 <p className="card-text card-header"
-                   onClick={() => onShowSubscriptions(subscribedTo(nameOfUserProfile2))}> Subscribed
-                    to: {data.users.byId.find(user => user.name === nameOfUserProfile2)?.subscriptions.length}</p>
-                {console.log(data.users.byId.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(nameOfUserProfile2, data)))}
-                {signedUser !== nameOfUserProfile2 && !data.users.byId.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(nameOfUserProfile2, data)) &&
-                <button className="btn btn-outline-success" onClick={() => subscribe(nameOfUserProfile2)}>
+                   onClick={() => onShowSubscriptions(subscribedTo(userOfProfile))}> Subscribed
+                    to: {data.users.byId.find(user => user.name === userOfProfile)?.subscriptions.length}</p>
+                {signedUser !== userOfProfile && !data.users.byId.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(userOfProfile, data)) &&
+                <button className="btn btn-outline-success" onClick={() => subscribe(userOfProfile)}>
                     Subscribe
                 </button>
                 }
-
-                {console.log(data.users.byId.find(user => user.name === signedUser)?.subscriptions)}
-                <p className="card-text card-header"> Posts </p>
+                {signedUser !== userOfProfile && data.users.byId.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(userOfProfile, data)) &&
+                <button className="btn btn-outline-primary" onClick={() => unSubscribe(userOfProfile)}>
+                    Unsubscribe
+                </button>
+                }
+                <p className="card-text card-header"> Your posts </p>
                 {postElements}
+                {signedUser === userOfProfile &&
+                <button className="btn btn-outline-success" onClick={() => setOpenTestEditor(true)}>
+                    +
+                </button>
+                }
                 <Link to="/" onClick={() => showUserProfile('')}>
                     To posts
                 </Link>
-
             </div>
-
         );
 
 }

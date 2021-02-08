@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import {Profile} from "../profile/Profile";
 
 export const Posts: React.FC<IPostsInterface> = (props) => {
-    const {signedUser, signedUserID, nameOfUserProfile, showUserProfile, unsign} = props;
+    const {signedUser, signedUserID, userOfProfile, showUserProfile, unsign} = props;
     const [showAllPosts, setShowAllPosts] = useState<boolean>(true);
     const postElements = data.posts.byId.map((post) => {
         let userSubscriptions = data.users.byId.filter(user => user.name === signedUser)[0].subscriptions;
@@ -15,9 +15,8 @@ export const Posts: React.FC<IPostsInterface> = (props) => {
         } else if (userSubscriptions.includes(post.author)) {
             return <PostText post={post} signedUserID={signedUserID} showUserProfile={showUserProfile}/>
         }
-
     })
-    switch (nameOfUserProfile === '') {
+    switch (userOfProfile === '') {
         case true:
             return (
                 <div className='posts card-body text-center col-sm-3'>
@@ -37,10 +36,8 @@ export const Posts: React.FC<IPostsInterface> = (props) => {
             );
         case false:
             return (
-                <Profile signedUser={signedUser} nameOfUserProfile2={nameOfUserProfile}
+                <Profile signedUser={signedUser} userOfProfile={userOfProfile}
                          showUserProfile={showUserProfile} unsign={unsign}/>
             )
-
     }
-
 }

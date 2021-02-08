@@ -16,7 +16,7 @@ function App() {
     const [signed, setSigned] = useState<boolean>(false);
     const [signedUser, setSignedUser] = useState<string>('');
     const [signedUserID, setSignedUserID] = useState<string>('');
-    const [nameOfUserProfile, setNameOfUserProfile] = useState<string>('');
+    const [userOfProfile, setUserOfProfile] = useState<string>('');
     const onSignUp = () => {
         setSigned(true);
         let isExistent = data.users.byId.filter((user) => user.name === signedUser)
@@ -37,7 +37,7 @@ function App() {
         setSignedUser(event.target.value);
     }
     const showUserProfile = (name: string) => {
-        setNameOfUserProfile(name)
+        setUserOfProfile(name)
     }
 
     switch (signed) {
@@ -45,7 +45,6 @@ function App() {
             return (
                 <Signup onSignUp={onSignUp} onUserEnter={onUserEnter} signedUser={signedUser}/>
             )
-            break;
         case true:
             return (
                 <Router>
@@ -53,10 +52,10 @@ function App() {
                         <Switch>
                             <Route path="/" exact>
                                 <Posts signedUser={signedUser} signedUserID={signedUserID}
-                                       nameOfUserProfile={nameOfUserProfile} showUserProfile={showUserProfile} unsign = {setSigned} />
+                                       userOfProfile={userOfProfile} showUserProfile={showUserProfile} unsign = {setSigned} />
                             </Route>
                             <Route path="/profile">
-                                <Profile signedUser={signedUser} nameOfUserProfile2={nameOfUserProfile}
+                                <Profile signedUser={signedUser} userOfProfile={userOfProfile}
                                          showUserProfile={showUserProfile} unsign = {setSigned}/>
                             </Route>
 
@@ -66,9 +65,7 @@ function App() {
                 </Router>
 
             )
-            break;
     }
-
 }
 
 export default App;
