@@ -1,15 +1,23 @@
 import React, {useState} from "react";
 import {INewPostInterface} from "./profileInterface";
 import {Post} from "../postClass/PostClass";
-import {data} from "../data/data";
+import {useDispatch, useSelector} from "react-redux";
+import {IPostsState} from "../reducers/postsReducer";
+import {addPost, addPostsIds} from "../actions/postAction";
 
 export const NewPost: React.FC<INewPostInterface> = (props) => {
     const {signedUserID, setOpenTestEditor} = props;
     const [textAreatext, setTextAreaText] = useState<string>('');
-    const addPost = () => {
+    const dispatch = useDispatch()
+
+    const createPost = () => {
         let newPost = new Post(signedUserID, textAreatext)
-        data.posts.byId.push(newPost);
-        data.posts.allIds.push(newPost.id)
+        dispatch({type: "ADD_POST", payload:newPost })
+        dispatch({type: "ADD_POSTS_IDS", payload:newPost.id })
+        //posts.push(newPost);
+        //postsIDs.push(newPost.id)
+        // addPost(newPost);
+        // addPostsIds(newPost.id)
     }
     return (
         <div className="mb-3">
@@ -20,7 +28,7 @@ export const NewPost: React.FC<INewPostInterface> = (props) => {
                 Back
             </button>
             <button className="btn btn-outline-success" onClick={() => {
-                addPost();
+                createPost();
                 setTextAreaText('');
                 setOpenTestEditor(false)
             }}>

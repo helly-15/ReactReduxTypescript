@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {data} from '../data/data';
+//import {data} from '../data/data';
 import {IProfileInterface} from './profileInterface';
 import {getNameById} from '../utils/getNameById';
 import {Link} from "react-router-dom";
@@ -7,13 +7,23 @@ import {PostText} from "../posts/PostText";
 import {SubscriptionList} from "../subscriptions/SubscriptionList";
 import {getIdByName} from "../utils/getIdByName";
 import {NewPost} from "./NewPost";
+import {useSelector} from "react-redux";
+import {IPostsState, IUsersState} from "../reducers/postsReducer";
 
 export const Profile: React.FC<IProfileInterface> = (props) => {
     let {signedUser, userOfProfile, showUserProfile, unsign} = props;
     const [subscriptions, setSubscriptions] = useState<string[]>([]);
     const [openPostEditor, setOpenTestEditor] = useState<boolean>(false);
-    const signedUserID: string = getIdByName(signedUser, data);
-    const userPosts = data.posts.byId.filter(post => post.author === signedUserID);
+
+    const posts = useSelector<IPostsState, IPostsState["posts"]["byId"]>(
+        (state) => state.posts.byId
+    );
+    const users = useSelector<IUsersState, IUsersState["users"]["byId"]>(
+        (state) => state.users.byId
+    );
+    const signedUserID: string = getIdByName(signedUser, users);
+    const userPosts = posts.filter(post => post.author === signedUserID);
+
     if (userOfProfile === '') {
         userOfProfile = signedUser
     }
@@ -21,18 +31,18 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
         <PostText post={post} signedUserID={signedUserID} showUserProfile={showUserProfile}/>
     )
     const subscribe = (nameToSubscribe: string) => {
-        return data.users.byId.find(user => user.name === signedUser)?.subscriptions.push(getIdByName(nameToSubscribe, data))
+        return users.find(user => user.name === signedUser)?.subscriptions.push(getIdByName(nameToSubscribe, users))
     }
     const unSubscribe = (nameToUnSubscribe: string) => {
-        const index: number = data.users.byId.find(user => user.name === signedUser)!.subscriptions.indexOf(getIdByName(nameToUnSubscribe, data));
+        const index: number = users.find(user => user.name === signedUser)!.subscriptions.indexOf(getIdByName(nameToUnSubscribe, users));
         if (index > -1) {
-            data.users.byId.find(user => user.name === signedUser)!.subscriptions.splice(index, 1);
+            users.find(user => user.name === signedUser)!.subscriptions.splice(index, 1);
         }
     }
     const subscribers = (subsc: string): string[] => {
         let subscribedPeople: string[] = [];
-        data.users.byId.map(user => {
-            if (user.subscriptions.includes(getIdByName(subsc, data))) {
+        users.map(user => {
+            if (user.subscriptions.includes(getIdByName(subsc, users))) {
                 subscribedPeople.push(user.name)
             }
         })
@@ -40,7 +50,7 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
     };
     const subscribedTo = (userName: string): string[] => {
         let subscribedToArray: string[] = [];
-        data.users.byId.find(user => user.name === userName)?.subscriptions.map(person => subscribedToArray.push(getNameById(person, data)))
+        users.find(user => user.name === userName)?.subscriptions.map(person => subscribedToArray.push(getNameById(person, users)))
         return subscribedToArray
     }
     const onShowSubscriptions = (array: string[] | undefined) => {
@@ -50,7 +60,7 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
     const onClose = () => {
         setSubscriptions([])
     }
-    const isSubscribed = data.users.byId.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(userOfProfile, data))
+    const isSubscribed = users.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(userOfProfile, users))
 
     if (subscriptions.length > 0) {
         return <SubscriptionList subscriptions={subscriptions} onClose={onClose}/>
@@ -71,7 +81,7 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
                    onClick={() => onShowSubscriptions(subscribers(userOfProfile))}> Subscribers: {subscribers(userOfProfile).length}</p>
                 <p className="card-text card-header"
                    onClick={() => onShowSubscriptions(subscribedTo(userOfProfile))}> Subscribed
-                    to: {data.users.byId.find(user => user.name === userOfProfile)?.subscriptions.length}</p>
+                    to: {users.find(user => user.name === userOfProfile)?.subscriptions.length}</p>
                 {signedUser !== userOfProfile && !isSubscribed &&
                 <button className="btn btn-outline-success" onClick={() => subscribe(userOfProfile)}>
                     Subscribe

@@ -11,15 +11,20 @@ import {
     Link
 } from 'react-router-dom';
 import {Profile} from './profile/Profile';
+import {useSelector} from "react-redux";
+import {IUsersState} from "./reducers/postsReducer";
 
 function App() {
     const [signed, setSigned] = useState<boolean>(false);
     const [signedUser, setSignedUser] = useState<string>('');
     const [signedUserID, setSignedUserID] = useState<string>('');
     const [userOfProfile, setUserOfProfile] = useState<string>('');
+    const users = useSelector<IUsersState, IUsersState["users"]["byId"]>(
+        (state) => state.users.byId
+    );
     const onSignUp = () => {
         setSigned(true);
-        let isExistent = data.users.byId.filter((user) => user.name === signedUser)
+        let isExistent = users.filter((user) => user.name === signedUser)
         if (isExistent.length > 0) {
             setSignedUserID(isExistent[0].username)
         } else {

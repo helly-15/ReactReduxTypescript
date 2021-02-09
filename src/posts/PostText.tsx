@@ -1,11 +1,16 @@
-import {data} from '../data/data'
+
 import {IPostTextInterface} from "./postsInterface";
 import {useState} from "react";
+import {useSelector} from "react-redux";
+import {IUsersState} from "../reducers/postsReducer";
 
 export const PostText: React.FC<IPostTextInterface> = (props) => {
     const {post, signedUserID, showUserProfile} = props;
     const [liked, setLiked] = useState<boolean>(false);
-    const authorName = data.users.byId.find(user => user.username === post.author)!.name
+    const users = useSelector<IUsersState, IUsersState["users"]["byId"]>(
+        (state) => state.users.byId
+    );
+    const authorName = users.find(user => user.username === post.author)!.name
     return (
         <div className='posts-post card'>
             <h3 className='card-title text-left' onClick={() => showUserProfile(authorName)}> {authorName}</h3>
@@ -13,7 +18,7 @@ export const PostText: React.FC<IPostTextInterface> = (props) => {
             <span> Liked by:
                 {
                     post.likes.map(userLike => {
-                        let userLikeName = data.users.byId.find(user => user.username === userLike)!.name
+                        let userLikeName = users.find(user => user.username === userLike)!.name
                         return <a href='#' onClick={() => showUserProfile(userLikeName)}> {userLikeName} </a>
                     }).reverse()
                 }

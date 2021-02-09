@@ -1,5 +1,5 @@
-import {IDataInterface} from "../data/dataInterface";
+import {IUsersState} from "../reducers/postsReducer";
 
-export function getNameById(id: string, data: IDataInterface) {
-    return data.users.byId.filter(user => user.username === id)[0].name
+export function getNameById(id: string, data: IUsersState['users']['byId']) {
+    return data.filter(user => user.username === id)[0].name
 }
