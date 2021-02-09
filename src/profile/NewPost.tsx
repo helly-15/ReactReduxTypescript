@@ -12,12 +12,8 @@ export const NewPost: React.FC<INewPostInterface> = (props) => {
 
     const createPost = () => {
         let newPost = new Post(signedUserID, textAreatext)
-        dispatch({type: "ADD_POST", payload:newPost })
-        dispatch({type: "ADD_POSTS_IDS", payload:newPost.id })
-        //posts.push(newPost);
-        //postsIDs.push(newPost.id)
-        // addPost(newPost);
-        // addPostsIds(newPost.id)
+        dispatch(addPost(newPost))
+        dispatch(addPostsIds(newPost.id))
     }
     return (
         <div className="mb-3">

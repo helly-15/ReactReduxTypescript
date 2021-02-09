@@ -74,7 +74,7 @@ export const postsReducer = (state: IPostsState = initialState, action: IAddPost
         }
         case "ADD_POSTS_IDS": {
             console.log("ADD_POSTS_IDS event")
-            return {...state, allIds: [...state.posts.allIds, action.payload]}
+            return {...state, posts: { ...state.posts, allIds: [...state.posts.allIds, action.payload] }}
         }
         default:
             return state
