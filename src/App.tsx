@@ -11,17 +11,25 @@ import {
     Link
 } from 'react-router-dom';
 import {Profile} from './profile/Profile';
-import {useSelector} from "react-redux";
-import {IUsersState} from "./reducers/postsReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {IUsersState} from "./reducers/usersReducer";
+import {Post} from "./postClass/PostClass";
+import {addPost, addPostsIds} from "./actions/postAction";
+import {addUser, addUsersIds} from "./actions/userAction";
+import {IStateInterface} from "./store/store";
 
 function App() {
     const [signed, setSigned] = useState<boolean>(false);
     const [signedUser, setSignedUser] = useState<string>('');
     const [signedUserID, setSignedUserID] = useState<string>('');
     const [userOfProfile, setUserOfProfile] = useState<string>('');
-    const users = useSelector<IUsersState, IUsersState["users"]["byId"]>(
-        (state) => state.users.byId
+
+    const users = useSelector<IStateInterface, IStateInterface['usersstate']["users"]["byId"]>(
+        (state) => {
+            console.log(state.usersstate.users +"state")
+            return state.usersstate.users.byId}
     );
+    const dispatch = useDispatch()
     const onSignUp = () => {
         setSigned(true);
         let isExistent = users.filter((user) => user.name === signedUser)
@@ -33,8 +41,9 @@ function App() {
             //
             //
             let newUser = new User(signedUser);
-            data.users.byId.push(newUser);
-            data.users.allIds.push(newUser.username);
+
+            dispatch(addUser(newUser))
+            dispatch(addUsersIds(newUser.username))
             setSignedUserID(newUser.username)
         }
     }

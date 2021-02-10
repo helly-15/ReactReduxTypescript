@@ -1,4 +1,4 @@
-import {IUsersState} from "../reducers/postsReducer";
+import {IUsersState} from "../reducers/usersReducer";
 
 
 export function getIdByName(name: string, data: IUsersState['users']['byId']) {

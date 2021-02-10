@@ -2,13 +2,18 @@
 import {IPostTextInterface} from "./postsInterface";
 import {useState} from "react";
 import {useSelector} from "react-redux";
-import {IUsersState} from "../reducers/postsReducer";
+import {IUsersState} from "../reducers/usersReducer";
+import {IStateInterface} from "../store/store";
+
 
 export const PostText: React.FC<IPostTextInterface> = (props) => {
     const {post, signedUserID, showUserProfile} = props;
     const [liked, setLiked] = useState<boolean>(false);
-    const users = useSelector<IUsersState, IUsersState["users"]["byId"]>(
-        (state) => state.users.byId
+
+    const users = useSelector<IStateInterface, IStateInterface['usersstate']["users"]["byId"]>(
+        (state) => {
+            console.log(state.usersstate.users +"state")
+            return state.usersstate.users.byId}
     );
     const authorName = users.find(user => user.username === post.author)!.name
     return (

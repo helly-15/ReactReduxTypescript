@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-//import {data} from '../data/data';
 import {IProfileInterface} from './profileInterface';
 import {getNameById} from '../utils/getNameById';
 import {Link} from "react-router-dom";
@@ -8,18 +7,24 @@ import {SubscriptionList} from "../subscriptions/SubscriptionList";
 import {getIdByName} from "../utils/getIdByName";
 import {NewPost} from "./NewPost";
 import {useSelector} from "react-redux";
-import {IPostsState, IUsersState} from "../reducers/postsReducer";
+import {IPostsState} from "../reducers/postsReducer";
+import {IUsersState} from "../reducers/usersReducer";
+import {IStateInterface} from "../store/store";
 
 export const Profile: React.FC<IProfileInterface> = (props) => {
     let {signedUser, userOfProfile, showUserProfile, unsign} = props;
     const [subscriptions, setSubscriptions] = useState<string[]>([]);
     const [openPostEditor, setOpenTestEditor] = useState<boolean>(false);
 
-    const posts = useSelector<IPostsState, IPostsState["posts"]["byId"]>(
-        (state) => state.posts.byId
+    const posts = useSelector<IStateInterface, IStateInterface['postsstate']["posts"]["byId"]>(
+        (state) => {
+            console.log(state.postsstate.posts +"state")
+            return state.postsstate.posts.byId}
     );
-    const users = useSelector<IUsersState, IUsersState["users"]["byId"]>(
-        (state) => state.users.byId
+    const users = useSelector<IStateInterface, IStateInterface['usersstate']["users"]["byId"]>(
+        (state) => {
+            console.log(state.usersstate.users +"state")
+            return state.usersstate.users.byId}
     );
     const signedUserID: string = getIdByName(signedUser, users);
     const userPosts = posts.filter(post => post.author === signedUserID);
