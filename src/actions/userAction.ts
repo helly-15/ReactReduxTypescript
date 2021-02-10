@@ -1,13 +1,15 @@
-
 export interface IAddUser {
-    type: 'ADD_USER', payload: {
+    type: 'ADD_USER',
+    payload: {
         username: string,
         name: string,
         subscriptions: string[]
     }
 }
+
 export interface IAddUsersIds {
-    type: 'ADD_USERS_IDS', payload: string
+    type: 'ADD_USERS_IDS',
+    payload: string
 }
 
 

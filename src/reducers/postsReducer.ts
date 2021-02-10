@@ -38,16 +38,13 @@ export const initialStateOfPosts = {
 export const postsReducer = (state: IPostsState = initialStateOfPosts, action: IAddPost | IAddPostsIds) => {
     switch (action.type) {
         case "ADD_POST": {
-           // console.log("ADD_POST event")
-            return {...state, posts: { ...state.posts, byId: [...state.posts.byId, action.payload] }}
+            return {...state, posts: {...state.posts, byId: [...state.posts.byId, action.payload]}}
         }
         case "ADD_POSTS_IDS": {
-           // console.log("ADD_POSTS_IDS event")
-            return {...state, posts: { ...state.posts, allIds: [...state.posts.allIds, action.payload] }}
+            return {...state, posts: {...state.posts, allIds: [...state.posts.allIds, action.payload]}}
         }
 
         default:
-            console.log (state + "postsState");
             return state
     }
 }

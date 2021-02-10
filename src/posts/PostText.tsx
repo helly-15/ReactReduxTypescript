@@ -1,10 +1,7 @@
-
 import {IPostTextInterface} from "./postsInterface";
 import {useState} from "react";
 import {useSelector} from "react-redux";
-import {IUsersState} from "../reducers/usersReducer";
 import {IStateInterface} from "../store/store";
-
 
 export const PostText: React.FC<IPostTextInterface> = (props) => {
     const {post, signedUserID, showUserProfile} = props;
@@ -12,8 +9,8 @@ export const PostText: React.FC<IPostTextInterface> = (props) => {
 
     const users = useSelector<IStateInterface, IStateInterface['usersstate']["users"]["byId"]>(
         (state) => {
-            console.log(state.usersstate.users +"state")
-            return state.usersstate.users.byId}
+            return state.usersstate.users.byId
+        }
     );
     const authorName = users.find(user => user.username === post.author)!.name
     return (

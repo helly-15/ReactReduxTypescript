@@ -1,13 +1,16 @@
 export interface IAddPost {
-    type: 'ADD_POST', payload: {
+    type: 'ADD_POST',
+    payload: {
         id: string,
         author: string,
         body: string,
         likes: string[]
     }
 }
+
 export interface IAddPostsIds {
-    type: 'ADD_POSTS_IDS', payload: string
+    type: 'ADD_POSTS_IDS',
+    payload: string
 }
 
 

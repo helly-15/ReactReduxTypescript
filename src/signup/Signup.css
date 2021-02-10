@@ -1,17 +1,18 @@
-.signup{
+.signup {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     text-align: center;
     width: 50%;
-
 }
-.signup p{
+
+.signup p {
     font-size: 1.5em;
     font-weight: bold;
     color: aliceblue;
 }
-.signup button{
+
+.signup button {
     font-size: 1.2em;
     color: aliceblue;
 }

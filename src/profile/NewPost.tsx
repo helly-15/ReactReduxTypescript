@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {INewPostInterface} from "./profileInterface";
 import {Post} from "../postClass/PostClass";
-import {useDispatch, useSelector} from "react-redux";
-import {IPostsState} from "../reducers/postsReducer";
+import {useDispatch} from "react-redux";
 import {addPost, addPostsIds} from "../actions/postAction";
 
 export const NewPost: React.FC<INewPostInterface> = (props) => {
