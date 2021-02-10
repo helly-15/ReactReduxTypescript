@@ -1,3 +1,5 @@
+import {IPost} from "../../reducers/postsReducer";
+
 export interface IPostsInterface {
     signedUser: string,
     signedUserID: string,
@@ -10,14 +12,7 @@ export interface IPostsInterface {
 }
 
 export interface IPostTextInterface {
-    post:
-        {
-            id: string,
-            author: string,
-            body: string,
-            likes: string[]
-        },
-
+    post:IPost,
     signedUserID: string,
 
     showUserProfile(name: string): void,

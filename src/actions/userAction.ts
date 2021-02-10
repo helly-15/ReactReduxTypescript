@@ -1,7 +1,7 @@
 export interface IAddUser {
     type: 'ADD_USER',
     payload: {
-        username: string,
+        userId: string,
         name: string,
         subscriptions: string[]
     }
@@ -14,7 +14,7 @@ export interface IAddUsersIds {
 
 
 export const addUser = (user: {
-    username: string,
+    userId: string,
     name: string,
     subscriptions: string[]
 }): IAddUser => ({

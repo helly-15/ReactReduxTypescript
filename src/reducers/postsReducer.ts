@@ -1,14 +1,15 @@
 import {IAddPost, IAddPostsIds} from "../actions/postAction";
 
+export interface IPost {
+    id: string,
+    author: string,
+    body: string,
+    likes: string[]
+}
+
 export interface IPostsState {
     posts: {
-        byId:
-            {
-                id: string,
-                author: string,
-                body: string,
-                likes: string[]
-            }[],
+        byId: IPost[],
         allIds: string[]
     }
 }

@@ -1,13 +1,14 @@
 import {IAddUser, IAddUsersIds} from "../actions/userAction";
 
+export interface IUser {
+    userId: string,
+    name: string,
+    subscriptions: string[]
+}
+
 export interface IUsersState {
     users: {
-        byId:
-            {
-                username: string,
-                name: string,
-                subscriptions: string[]
-            }[],
+        byId:IUser[],
         allIds: string[]
     }
 }
@@ -16,17 +17,17 @@ export const initialStateOfUsers = {
     users: {
         byId: [
             {
-                username: "user1",
+                userId: "user1",
                 name: "Masha",
                 subscriptions: ["user2"]
             },
             {
-                username: "user2",
+                userId: "user2",
                 name: "Misha",
                 subscriptions: ["user1", "user3"]
             },
             {
-                username: "user3",
+                userId: "user3",
                 name: "Arisha",
                 subscriptions: ["user1"]
             }

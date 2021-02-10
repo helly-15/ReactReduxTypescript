@@ -29,12 +29,12 @@ function App() {
         setSigned(true);
         let isExistent = users.filter((user) => user.name === signedUser)
         if (isExistent.length > 0) {
-            setSignedUserID(isExistent[0].username)
+            setSignedUserID(isExistent[0].userId)
         } else {
             let newUser = new UserModel(signedUser);
             dispatch(addUser(newUser))
-            dispatch(addUsersIds(newUser.username))
-            setSignedUserID(newUser.username)
+            dispatch(addUsersIds(newUser.userId))
+            setSignedUserID(newUser.userId)
         }
     }
     const onUserEnter = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -2,6 +2,7 @@ import {IPostTextInterface} from "./postsInterface";
 import {useState} from "react";
 import {useSelector} from "react-redux";
 import {IStateInterface} from "../../store/store";
+import {IPost} from "../../reducers/postsReducer";
 
 export const Post: React.FC<IPostTextInterface> = (props) => {
     const {post, signedUserID, showUserProfile} = props;
@@ -12,7 +13,7 @@ export const Post: React.FC<IPostTextInterface> = (props) => {
             return state.usersstate.users.byId
         }
     );
-    const authorName = users.find(user => user.username === post.author)!.name
+    const authorName = users.find(user => user.userId === post.author)!.name
     return (
         <div className='posts-post card'>
             <h3 className='card-title text-left' onClick={() => showUserProfile(authorName)}> {authorName}</h3>
@@ -20,7 +21,7 @@ export const Post: React.FC<IPostTextInterface> = (props) => {
             <span> Liked by:
                 {
                     post.likes.map(userLike => {
-                        let userLikeName = users.find(user => user.username === userLike)!.name
+                        let userLikeName = users.find(user => user.userId === userLike)!.name
                         return <a href='#' onClick={() => showUserProfile(userLikeName)} key={userLikeName}> {userLikeName} </a>
                     }).reverse()
                 }
@@ -33,12 +34,7 @@ export const Post: React.FC<IPostTextInterface> = (props) => {
     )
 };
 
-function onLike(post: {
-    id: string,
-    author: string,
-    body: string,
-    likes: string[]
-}, signedUserID: string, liked: boolean) {
+function onLike(post: IPost, signedUserID: string, liked: boolean) {
     if (!liked) {
         if (!post.likes.includes(signedUserID)) {
             post.likes.push(signedUserID)
