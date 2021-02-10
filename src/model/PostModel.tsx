@@ -1,4 +1,4 @@
-export class Post {
+export class PostModel {
     static counter = 3;
     id: string;
     author: string;
@@ -6,10 +6,10 @@ export class Post {
     likes: string[];
 
     constructor(userId: string, body: string) {
-        this.id = 'post' + Post.counter;
+        this.id = 'post' + PostModel.counter;
         this.author = userId;
         this.body = body
         this.likes = [];
-        Post.counter++;
+        PostModel.counter++;
     }
 }

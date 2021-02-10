@@ -1,9 +1,9 @@
 import {IPostTextInterface} from "./postsInterface";
 import {useState} from "react";
 import {useSelector} from "react-redux";
-import {IStateInterface} from "../store/store";
+import {IStateInterface} from "../../store/store";
 
-export const PostText: React.FC<IPostTextInterface> = (props) => {
+export const Post: React.FC<IPostTextInterface> = (props) => {
     const {post, signedUserID, showUserProfile} = props;
     const [liked, setLiked] = useState<boolean>(false);
 
@@ -21,7 +21,7 @@ export const PostText: React.FC<IPostTextInterface> = (props) => {
                 {
                     post.likes.map(userLike => {
                         let userLikeName = users.find(user => user.username === userLike)!.name
-                        return <a href='#' onClick={() => showUserProfile(userLikeName)}> {userLikeName} </a>
+                        return <a href='#' onClick={() => showUserProfile(userLikeName)} key={userLikeName}> {userLikeName} </a>
                     }).reverse()
                 }
             </span>

@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Signup} from "./signup/Signup";
-import {Posts} from './posts/Posts';
-import {User} from "./user/User";
+import {Signup} from "./components/signup/Signup";
+import {Posts} from './components/posts/Posts';
+import {UserModel} from "./model/UserModel";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
 } from 'react-router-dom';
-import {Profile} from './profile/Profile';
+import {Profile} from './components/profile/Profile';
 import {useDispatch, useSelector} from "react-redux";
 import {addUser, addUsersIds} from "./actions/userAction";
 import {IStateInterface} from "./store/store";
@@ -31,7 +31,7 @@ function App() {
         if (isExistent.length > 0) {
             setSignedUserID(isExistent[0].username)
         } else {
-            let newUser = new User(signedUser);
+            let newUser = new UserModel(signedUser);
             dispatch(addUser(newUser))
             dispatch(addUsersIds(newUser.username))
             setSignedUserID(newUser.username)

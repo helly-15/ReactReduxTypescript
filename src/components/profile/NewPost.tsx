@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {INewPostInterface} from "./profileInterface";
-import {Post} from "../postClass/PostClass";
+import {PostModel} from "../../model/PostModel";
 import {useDispatch} from "react-redux";
-import {addPost, addPostsIds} from "../actions/postAction";
+import {addPost, addPostsIds} from "../../actions/postAction";
 
 export const NewPost: React.FC<INewPostInterface> = (props) => {
     const {signedUserID, setOpenTestEditor} = props;
@@ -10,7 +10,7 @@ export const NewPost: React.FC<INewPostInterface> = (props) => {
     const dispatch = useDispatch()
 
     const createPost = () => {
-        let newPost = new Post(signedUserID, textAreatext)
+        let newPost = new PostModel(signedUserID, textAreatext)
         dispatch(addPost(newPost))
         dispatch(addPostsIds(newPost.id))
     }

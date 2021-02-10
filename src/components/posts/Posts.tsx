@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {IPostsInterface} from './postsInterface';
-import {PostText} from './PostText';
+import {Post} from './Post';
 import {Link} from "react-router-dom";
 import {Profile} from "../profile/Profile";
 import {useSelector} from "react-redux";
-import {IStateInterface} from "../store/store";
+import {IStateInterface} from "../../store/store";
 
 export const Posts: React.FC<IPostsInterface> = (props) => {
     const {signedUser, signedUserID, userOfProfile, showUserProfile, unsign} = props;
@@ -23,9 +23,9 @@ export const Posts: React.FC<IPostsInterface> = (props) => {
     const postElements = posts.map((post) => {
         let userSubscriptions = users.filter(user => user.name === signedUser)[0].subscriptions;
         if (showAllPosts) {
-            return <PostText post={post} signedUserID={signedUserID} showUserProfile={showUserProfile}/>
+            return <Post post={post} signedUserID={signedUserID} showUserProfile={showUserProfile} key={Math.random()}/>
         } else if (userSubscriptions.includes(post.author)) {
-            return <PostText post={post} signedUserID={signedUserID} showUserProfile={showUserProfile}/>
+            return <Post post={post} signedUserID={signedUserID} showUserProfile={showUserProfile} key={Math.random()}/>
         }
     })
     switch (userOfProfile === '') {

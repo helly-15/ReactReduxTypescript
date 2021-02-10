@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {IProfileInterface} from './profileInterface';
-import {getNameById} from '../utils/getNameById';
+import {getNameById} from '../../utils/getNameById';
 import {Link} from "react-router-dom";
-import {PostText} from "../posts/PostText";
+import {Post} from "../posts/Post";
 import {SubscriptionList} from "../subscriptions/SubscriptionList";
-import {getIdByName} from "../utils/getIdByName";
+import {getIdByName} from "../../utils/getIdByName";
 import {NewPost} from "./NewPost";
 import {useSelector} from "react-redux";
-import {IStateInterface} from "../store/store";
+import {IStateInterface} from "../../store/store";
 
 export const Profile: React.FC<IProfileInterface> = (props) => {
     let {signedUser, userOfProfile, showUserProfile, unsign} = props;
@@ -31,7 +31,7 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
         userOfProfile = signedUser
     }
     const postElements = userPosts.map(post =>
-        <PostText post={post} signedUserID={signedUserID} showUserProfile={showUserProfile}/>
+        <Post post={post} signedUserID={signedUserID} showUserProfile={showUserProfile} key={Math.random()}/>
     )
     const subscribe = (nameToSubscribe: string) => {
         return users.find(user => user.name === signedUser)?.subscriptions.push(getIdByName(nameToSubscribe, users))

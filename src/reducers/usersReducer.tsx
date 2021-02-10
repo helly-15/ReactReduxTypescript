@@ -39,16 +39,13 @@ export const usersReducer = (state: IUsersState = initialStateOfUsers, action: I
 
     switch (action.type) {
         case "ADD_USER": {
-            // console.log("ADD_User event")
             return {...state, users: {...state.users, byId: [...state.users.byId, action.payload]}}
         }
         case "ADD_USERS_IDS": {
-            // console.log("ADD_Users_IDS event")
             return {...state, users: {...state.users, allIds: [...state.users.allIds, action.payload]}}
         }
 
         default:
-            console.log(state + "usersState");
             return state
     }
 }
