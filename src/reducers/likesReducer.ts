@@ -63,11 +63,6 @@ export const likesReducer = (state: ILikesState = initialStateOfLikes, action: I
             return {...state, likes: {...state.likes, allIds: [...state.likes.allIds, action.payload]}}
         }
         case "DELETE_LIKE":{
-            // return {
-            //     ...state,
-            //     likes: state.likes.byId.filter((like) => like.likedPost !== action.payload.postId && like.likedUser !== action.payload.userId )
-            // }
-
             const likeIdToRemove = state.likes.byId.find((like) => {
                 return like.likedPost === action.payload.postId && like.likedUser === action.payload.userId
             })?.id;

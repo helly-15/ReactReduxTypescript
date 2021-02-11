@@ -3,7 +3,7 @@ import {IAddUser, IAddUsersIds} from "../actions/userAction";
 export interface IUser {
     userId: string,
     name: string,
-    subscriptions: string[]
+   // subscriptions: string[]
 }
 
 export interface IUsersState {
@@ -19,17 +19,17 @@ export const initialStateOfUsers = {
             {
                 userId: "user1",
                 name: "Masha",
-                subscriptions: ["user2"]
+               // subscriptions: ["user2"]
             },
             {
                 userId: "user2",
                 name: "Misha",
-                subscriptions: ["user1", "user3"]
+               // subscriptions: ["user1", "user3"]
             },
             {
                 userId: "user3",
                 name: "Arisha",
-                subscriptions: ["user1"]
+               // subscriptions: ["user1"]
             }
         ],
         allIds: ["user1", "user2", "user3"]
