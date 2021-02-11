@@ -22,18 +22,20 @@ export const initialStateOfPosts = {
                 id: "post1",
                 author: "user1",
                 body: "To be or not to be",
-                likes: ["user2", "user3"]
+                likes: ["like1", "like2"]
             },
             {
                 id: "post2",
                 author: "user2",
                 body: "Little mouse little mouse where is your house",
-                likes: ["user1", "user3"]
+                likes: ["like3", "like4"]
             }
         ],
         allIds: ["post1", "post2"]
     }
 }
+
+
 
 
 export const postsReducer = (state: IPostsState = initialStateOfPosts, action: IAddPost | IAddPostsIds) => {

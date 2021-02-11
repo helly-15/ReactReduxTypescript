@@ -1,11 +1,8 @@
+import {IPost} from "../reducers/postsReducer";
+
 export interface IAddPost {
     type: 'ADD_POST',
-    payload: {
-        id: string,
-        author: string,
-        body: string,
-        likes: string[]
-    }
+    payload: IPost
 }
 
 export interface IAddPostsIds {
@@ -14,12 +11,7 @@ export interface IAddPostsIds {
 }
 
 
-export const addPost = (post: {
-    id: string,
-    author: string,
-    body: string,
-    likes: string[]
-}): IAddPost => ({
+export const addPost = (post: IPost): IAddPost => ({
     type: "ADD_POST",
     payload: post,
 });

@@ -1,10 +1,8 @@
+import {IUser} from "../reducers/usersReducer";
+
 export interface IAddUser {
     type: 'ADD_USER',
-    payload: {
-        userId: string,
-        name: string,
-        subscriptions: string[]
-    }
+    payload: IUser
 }
 
 export interface IAddUsersIds {
@@ -13,11 +11,7 @@ export interface IAddUsersIds {
 }
 
 
-export const addUser = (user: {
-    userId: string,
-    name: string,
-    subscriptions: string[]
-}): IAddUser => ({
+export const addUser = (user: IUser): IAddUser => ({
     type: "ADD_USER",
     payload: user,
 });
