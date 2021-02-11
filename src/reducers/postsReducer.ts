@@ -3,8 +3,7 @@ import {IAddPost, IAddPostsIds} from "../actions/postAction";
 export interface IPost {
     id: string,
     author: string,
-    body: string,
-    likes: string[]
+    body: string
 }
 
 export interface IPostsState {
@@ -22,13 +21,11 @@ export const initialStateOfPosts = {
                 id: "post1",
                 author: "user1",
                 body: "To be or not to be",
-                likes: ["like1", "like2"]
             },
             {
                 id: "post2",
                 author: "user2",
                 body: "Little mouse little mouse where is your house",
-                likes: ["like3", "like4"]
             }
         ],
         allIds: ["post1", "post2"]

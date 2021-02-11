@@ -60,10 +60,7 @@ export const likesReducer = (state: ILikesState = initialStateOfLikes, action: I
              */
         }
         case "ADD_LIKES_IDS": {
-            return {...state,
-                likes: {...state.likes, allIds: [...state.likes.allIds, action.payload]},
-
-            }
+            return {...state, likes: {...state.likes, allIds: [...state.likes.allIds, action.payload]}}
         }
         case "DELETE_LIKE":{
             // return {
