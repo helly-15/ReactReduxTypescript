@@ -6,6 +6,7 @@ export interface ISubsciribe {
     subscribedPerson: string,
     subscribedTo: string,
 }
+
 export interface ISubscribeState {
     subscriptions: {
         byId: ISubsciribe[],
@@ -39,20 +40,13 @@ export const initialStateOfSubscriptions = {
 export const subscriptionsReducer = (state: ISubscribeState = initialStateOfSubscriptions, action: IAddSubscription | IDeleteSubscription) => {
     switch (action.type) {
         case "ADD_SUBSCRIPTION": {
-            return {...state, subscriptions: {...state.subscriptions, byId: [...state.subscriptions.byId, action.payload]}}
-
-            /*
             return {
                 ...state,
-                likes: {
-                    ...state.likes,
-                    byId: [ ...state.likes.byId, action.payload ],
-                    allIds: [ ...state.likes.allIds, action.payload.id ],
-                }
+                subscriptions: {...state.subscriptions, byId: [...state.subscriptions.byId, action.payload]}
             }
-             */
+
         }
-        case "DELETE_SUBSCRIPTION":{
+        case "DELETE_SUBSCRIPTION": {
             const subscriptionIdToRemove = state.subscriptions.byId.find((subscription) => {
                 return subscription.subscribedPerson === action.payload.subscribedPerson && subscription.subscribedTo === action.payload.subscribedTo
             })?.id;
@@ -61,12 +55,10 @@ export const subscriptionsReducer = (state: ISubscribeState = initialStateOfSubs
                 ...state,
                 subscriptions: {
                     ...state.subscriptions,
-                    byId: [ ...state.subscriptions.byId.filter(subscription => subscription.id !== subscriptionIdToRemove) ]
+                    byId: [...state.subscriptions.byId.filter(subscription => subscription.id !== subscriptionIdToRemove)]
                 }
             }
         }
-
-
         default:
             return state
     }

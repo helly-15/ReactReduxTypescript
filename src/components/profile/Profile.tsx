@@ -8,8 +8,6 @@ import {getIdByName} from "../../utils/getIdByName";
 import {NewPost} from "./NewPost";
 import {useDispatch, useSelector} from "react-redux";
 import {IStateInterface} from "../../store/store";
-import {PostModel} from "../../model/PostModel";
-import {addPost, addPostsIds} from "../../actions/postAction";
 import {SubscriptionModel} from "../../model/SubscriptionModel";
 import {addSubscription, deleteSubscription} from "../../actions/subscriptionAction";
 
@@ -45,37 +43,26 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
     const subscribe = (nameToSubscribe: string) => {
         let newSubscription = new SubscriptionModel(signedUserID, getIdByName(nameToSubscribe, users))
         dispatch(addSubscription(newSubscription))
-       // return users.find(user => user.name === signedUser)?.subscriptions.push(getIdByName(nameToSubscribe, users))
     }
     const unSubscribe = (nameToUnSubscribe: string) => {
         dispatch(deleteSubscription(signedUserID, getIdByName(nameToUnSubscribe, users)))
-        // const index: number = users.find(user => user.name === signedUser)!.subscriptions.indexOf(getIdByName(nameToUnSubscribe, users));
-        // if (index > -1) {
-        //     users.find(user => user.name === signedUser)!.subscriptions.splice(index, 1);
-        // }
     }
     const subscribers = (profUser: string): string[] => {
         let subscribedPeople: string[] = [];
-        subscriptionsFromStore.forEach(subs=>{
-            if (subs.subscribedTo ===profUser){
+        subscriptionsFromStore.forEach(subs => {
+            if (subs.subscribedTo === profUser) {
                 subscribedPeople.push(getNameById(subs.subscribedPerson, users))
             }
         })
-        // users.map(user => {
-        //     if (user.subscriptions.includes(getIdByName(subsc, users))) {
-        //         subscribedPeople.push(user.name)
-        //     }
-        // })
         return subscribedPeople
     };
     const subscribedTo = (profUser: string): string[] => {
         let subscribedToArray: string[] = [];
-        subscriptionsFromStore.forEach(subs=>{
-            if (subs.subscribedPerson ===profUser){
+        subscriptionsFromStore.forEach(subs => {
+            if (subs.subscribedPerson === profUser) {
                 subscribedToArray.push(getNameById(subs.subscribedTo, users))
             }
         })
-        // users.find(user => user.name === userName)?.subscriptions.map(person => subscribedToArray.push(getNameById(person, users)))
         return subscribedToArray
     }
     const onShowSubscriptions = (array: string[] | undefined) => {
@@ -86,7 +73,6 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
         setSubscriptions([])
     }
     const isSubscribed = subscribedTo(signedUserID).includes(getIdByName(userOfProfile, users))
-    //const isSubscribed = users.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(userOfProfile, users))
 
     if (subscriptions.length > 0) {
         return <SubscriptionList subscriptions={subscriptions} onClose={onClose}/>
@@ -130,5 +116,4 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
                 </Link>
             </div>
         );
-
 }

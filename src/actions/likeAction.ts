@@ -10,9 +10,10 @@ export interface IAddLikesIds {
     type: 'ADD_LIKES_IDS',
     payload: string
 }
+
 export interface IDeleteLike {
     type: "DELETE_LIKE",
-    payload: {userId:string, postId:string}
+    payload: { userId: string, postId: string }
 }
 
 export const addLike = (like: ILike): IAddLike => ({
@@ -24,7 +25,7 @@ export const addLikesIds = (likeId: string): IAddLikesIds => ({
     type: "ADD_LIKES_IDS",
     payload: likeId,
 });
-export const deleteLike = (userId: string, postId :string): IDeleteLike => ({
+export const deleteLike = (userId: string, postId: string): IDeleteLike => ({
     type: "DELETE_LIKE",
-    payload: {userId,postId}
+    payload: {userId, postId}
 });

@@ -12,7 +12,7 @@ export interface IPostsInterface {
 }
 
 export interface IPostTextInterface {
-    post:IPost,
+    post: IPost,
     signedUserID: string,
 
     showUserProfile(name: string): void,

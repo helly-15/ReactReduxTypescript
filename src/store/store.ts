@@ -11,5 +11,5 @@ export interface IStateInterface {
     postsstate: IPostsState,
     usersstate: IUsersState,
     likesstate: ILikesState,
-    subscriptionsstate:ISubscribeState
+    subscriptionsstate: ISubscribeState
 }

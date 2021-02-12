@@ -33,8 +33,6 @@ export const initialStateOfPosts = {
 }
 
 
-
-
 export const postsReducer = (state: IPostsState = initialStateOfPosts, action: IAddPost | IAddPostsIds) => {
     switch (action.type) {
         case "ADD_POST": {

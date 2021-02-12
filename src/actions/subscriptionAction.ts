@@ -8,7 +8,7 @@ export interface IAddSubscription {
 
 export interface IDeleteSubscription {
     type: "DELETE_SUBSCRIPTION",
-    payload: {subscribedPerson:string, subscribedTo:string}
+    payload: { subscribedPerson: string, subscribedTo: string }
 }
 
 export const addSubscription = (subscription: ISubsciribe): IAddSubscription => ({
@@ -17,7 +17,7 @@ export const addSubscription = (subscription: ISubsciribe): IAddSubscription => 
 });
 
 
-export const deleteSubscription = (subscribedPerson: string, subscribedTo :string): IDeleteSubscription => ({
+export const deleteSubscription = (subscribedPerson: string, subscribedTo: string): IDeleteSubscription => ({
     type: "DELETE_SUBSCRIPTION",
     payload: {subscribedPerson, subscribedTo}
 });

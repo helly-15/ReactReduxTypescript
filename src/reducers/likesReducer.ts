@@ -6,6 +6,7 @@ export interface ILike {
     likedPost: string,
     likedUser: string,
 }
+
 export interface ILikesState {
     likes: {
         byId: ILike[],
@@ -43,7 +44,7 @@ export const initialStateOfLikes = {
         allIds: ["like1", "like2", "like3", "like4"]
     }
 }
-export const likesReducer = (state: ILikesState = initialStateOfLikes, action: IAddLike | IAddLikesIds|IDeleteLike) => {
+export const likesReducer = (state: ILikesState = initialStateOfLikes, action: IAddLike | IAddLikesIds | IDeleteLike) => {
     switch (action.type) {
         case "ADD_LIKE": {
             return {...state, likes: {...state.likes, byId: [...state.likes.byId, action.payload]}}
@@ -62,7 +63,7 @@ export const likesReducer = (state: ILikesState = initialStateOfLikes, action: I
         case "ADD_LIKES_IDS": {
             return {...state, likes: {...state.likes, allIds: [...state.likes.allIds, action.payload]}}
         }
-        case "DELETE_LIKE":{
+        case "DELETE_LIKE": {
             const likeIdToRemove = state.likes.byId.find((like) => {
                 return like.likedPost === action.payload.postId && like.likedUser === action.payload.userId
             })?.id;
@@ -71,8 +72,8 @@ export const likesReducer = (state: ILikesState = initialStateOfLikes, action: I
                 ...state,
                 likes: {
                     ...state.likes,
-                    byId: [ ...state.likes.byId.filter(like => like.id !== likeIdToRemove) ],
-                    allIds: [ ...state.likes.allIds.filter(likeId => likeId !== likeIdToRemove) ],
+                    byId: [...state.likes.byId.filter(like => like.id !== likeIdToRemove)],
+                    allIds: [...state.likes.allIds.filter(likeId => likeId !== likeIdToRemove)],
                 }
             }
         }
