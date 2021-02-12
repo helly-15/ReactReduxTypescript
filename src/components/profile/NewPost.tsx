@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {INewPostInterface} from "./profileInterface";
+import {INewPostInterface} from "./INewPostInterface";
 import {PostModel} from "../../model/PostModel";
 import {useDispatch} from "react-redux";
 import {addPost, addPostsIds} from "../../actions/postAction";

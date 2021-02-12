@@ -1,4 +1,4 @@
-import {IPostTextInterface} from "./postsInterface";
+import {IPostInterface} from "./IPostInterface";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {IStateInterface} from "../../store/store";
@@ -8,7 +8,7 @@ import {LikeModel} from "../../model/LikeModel";
 import {addLike, addLikesIds, deleteLike} from "../../actions/likeAction";
 
 
-export const Post: React.FC<IPostTextInterface> = (props) => {
+export const Post: React.FC<IPostInterface> = (props) => {
     const dispatch = useDispatch();
     const {post, signedUserID, showUserProfile} = props;
     const [liked, setLiked] = useState<boolean>(false);

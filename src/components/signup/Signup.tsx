@@ -1,5 +1,5 @@
 import React from "react";
-import {ISignupInterface} from "./signupInterface";
+import {ISignupInterface} from "./ISignupInterface";
 import './Signup.css'
 
 export const Signup: React.FC<ISignupInterface> = (props) => {

@@ -6,9 +6,3 @@ export interface IProfileInterface {
 
     unsign(value: boolean): void
 }
-
-export interface INewPostInterface {
-    signedUserID: string,
-
-    setOpenTestEditor(value: boolean): void,
-}

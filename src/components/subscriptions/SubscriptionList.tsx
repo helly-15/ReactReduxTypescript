@@ -1,5 +1,5 @@
 import React from "react";
-import {ISubscriptionListInterface} from "./subscriptionListInterface";
+import {ISubscriptionListInterface} from "./ISubscriptionListInterface";
 
 export const SubscriptionList: React.FC<ISubscriptionListInterface> = (props) => {
     const {subscriptions, onClose} = props;

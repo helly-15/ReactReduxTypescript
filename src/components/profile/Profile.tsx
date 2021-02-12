@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {IProfileInterface} from './profileInterface';
+import {IProfileInterface} from './IProfileInterface';
 import {getNameById} from '../../utils/getNameById';
 import {Link} from "react-router-dom";
 import {Post} from "../posts/Post";
