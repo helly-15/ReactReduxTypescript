@@ -52,10 +52,10 @@ export const Post: React.FC<IPostInterface> = (props) => {
                     })
                 }
             </span>
-            <a href='#' onClick={() => {
+            <button onClick={() => {
                 onLike(post, signedUserID, liked);
                 setLiked(!liked)
-            }}>❤ </a>
+            }}>❤ </button>
         </div>
     )
 };
