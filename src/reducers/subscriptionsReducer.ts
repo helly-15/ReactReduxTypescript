@@ -9,7 +9,6 @@ export interface ISubsciribe {
 export interface ISubscribeState {
     subscriptions: {
         byId: ISubsciribe[],
-        allIds: string[]
     }
 }
 
@@ -35,7 +34,6 @@ export const initialStateOfSubscriptions = {
             },
 
         ],
-        allIds: ["subscription1", "subscription2", "subscription3"]
     }
 }
 export const subscriptionsReducer = (state: ISubscribeState = initialStateOfSubscriptions, action: IAddSubscription | IDeleteSubscription) => {
@@ -63,8 +61,7 @@ export const subscriptionsReducer = (state: ISubscribeState = initialStateOfSubs
                 ...state,
                 subscriptions: {
                     ...state.subscriptions,
-                    byId: [ ...state.subscriptions.byId.filter(subscription => subscription.id !== subscriptionIdToRemove) ],
-                    allIds: [ ...state.subscriptions.allIds.filter(subscriptionId => subscriptionId !== subscriptionIdToRemove) ],
+                    byId: [ ...state.subscriptions.byId.filter(subscription => subscription.id !== subscriptionIdToRemove) ]
                 }
             }
         }

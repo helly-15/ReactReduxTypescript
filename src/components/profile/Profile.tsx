@@ -6,14 +6,18 @@ import {Post} from "../posts/Post";
 import {SubscriptionList} from "../subscriptions/SubscriptionList";
 import {getIdByName} from "../../utils/getIdByName";
 import {NewPost} from "./NewPost";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {IStateInterface} from "../../store/store";
+import {PostModel} from "../../model/PostModel";
+import {addPost, addPostsIds} from "../../actions/postAction";
+import {SubscriptionModel} from "../../model/SubscriptionModel";
+import {addSubscription, deleteSubscription} from "../../actions/subscriptionAction";
 
 export const Profile: React.FC<IProfileInterface> = (props) => {
     let {signedUser, userOfProfile, showUserProfile, unsign} = props;
     const [subscriptions, setSubscriptions] = useState<string[]>([]);
     const [openPostEditor, setOpenTestEditor] = useState<boolean>(false);
-
+    const dispatch = useDispatch();
     const posts = useSelector<IStateInterface, IStateInterface['postsstate']["posts"]["byId"]>(
         (state) => {
             return state.postsstate.posts.byId
@@ -22,6 +26,11 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
     const users = useSelector<IStateInterface, IStateInterface['usersstate']["users"]["byId"]>(
         (state) => {
             return state.usersstate.users.byId
+        }
+    );
+    const subscriptionsFromStore = useSelector<IStateInterface, IStateInterface['subscriptionsstate']["subscriptions"]["byId"]>(
+        (state) => {
+            return state.subscriptionsstate.subscriptions.byId
         }
     );
     const signedUserID: string = getIdByName(signedUser, users);
@@ -34,26 +43,39 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
         <Post post={post} signedUserID={signedUserID} showUserProfile={showUserProfile} key={Math.random()}/>
     )
     const subscribe = (nameToSubscribe: string) => {
-        return users.find(user => user.name === signedUser)?.subscriptions.push(getIdByName(nameToSubscribe, users))
+        let newSubscription = new SubscriptionModel(signedUserID, getIdByName(nameToSubscribe, users))
+        dispatch(addSubscription(newSubscription))
+       // return users.find(user => user.name === signedUser)?.subscriptions.push(getIdByName(nameToSubscribe, users))
     }
     const unSubscribe = (nameToUnSubscribe: string) => {
-        const index: number = users.find(user => user.name === signedUser)!.subscriptions.indexOf(getIdByName(nameToUnSubscribe, users));
-        if (index > -1) {
-            users.find(user => user.name === signedUser)!.subscriptions.splice(index, 1);
-        }
+        dispatch(deleteSubscription(signedUserID, getIdByName(nameToUnSubscribe, users)))
+        // const index: number = users.find(user => user.name === signedUser)!.subscriptions.indexOf(getIdByName(nameToUnSubscribe, users));
+        // if (index > -1) {
+        //     users.find(user => user.name === signedUser)!.subscriptions.splice(index, 1);
+        // }
     }
-    const subscribers = (subsc: string): string[] => {
+    const subscribers = (profUser: string): string[] => {
         let subscribedPeople: string[] = [];
-        users.map(user => {
-            if (user.subscriptions.includes(getIdByName(subsc, users))) {
-                subscribedPeople.push(user.name)
+        subscriptionsFromStore.forEach(subs=>{
+            if (subs.subscribedTo ===profUser){
+                subscribedPeople.push(getNameById(subs.subscribedPerson, users))
             }
         })
+        // users.map(user => {
+        //     if (user.subscriptions.includes(getIdByName(subsc, users))) {
+        //         subscribedPeople.push(user.name)
+        //     }
+        // })
         return subscribedPeople
     };
-    const subscribedTo = (userName: string): string[] => {
+    const subscribedTo = (profUser: string): string[] => {
         let subscribedToArray: string[] = [];
-        users.find(user => user.name === userName)?.subscriptions.map(person => subscribedToArray.push(getNameById(person, users)))
+        subscriptionsFromStore.forEach(subs=>{
+            if (subs.subscribedPerson ===profUser){
+                subscribedToArray.push(getNameById(subs.subscribedTo, users))
+            }
+        })
+        // users.find(user => user.name === userName)?.subscriptions.map(person => subscribedToArray.push(getNameById(person, users)))
         return subscribedToArray
     }
     const onShowSubscriptions = (array: string[] | undefined) => {
@@ -63,7 +85,8 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
     const onClose = () => {
         setSubscriptions([])
     }
-    const isSubscribed = users.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(userOfProfile, users))
+    const isSubscribed = subscribedTo(signedUserID).includes(getIdByName(userOfProfile, users))
+    //const isSubscribed = users.find(user => user.name === signedUser)?.subscriptions.includes(getIdByName(userOfProfile, users))
 
     if (subscriptions.length > 0) {
         return <SubscriptionList subscriptions={subscriptions} onClose={onClose}/>
@@ -81,10 +104,10 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
                 }
                 <p className="card-text card-header"> {userOfProfile}</p>
                 <p className="card-text card-header"
-                   onClick={() => onShowSubscriptions(subscribers(userOfProfile))}> Subscribers: {subscribers(userOfProfile).length}</p>
+                   onClick={() => onShowSubscriptions(subscribers(getIdByName(userOfProfile, users)))}> Subscribers: {subscribers(getIdByName(userOfProfile, users)).length}</p>
                 <p className="card-text card-header"
-                   onClick={() => onShowSubscriptions(subscribedTo(userOfProfile))}> Subscribed
-                    to: {users.find(user => user.name === userOfProfile)?.subscriptions.length}</p>
+                   onClick={() => onShowSubscriptions(subscribedTo(getIdByName(userOfProfile, users)))}> Subscribed
+                    to: {subscribedTo(getIdByName(userOfProfile, users)).length}</p>
                 {signedUser !== userOfProfile && !isSubscribed &&
                 <button className="btn btn-outline-success" onClick={() => subscribe(userOfProfile)}>
                     Subscribe

@@ -20,8 +20,13 @@ export const Posts: React.FC<IPostsInterface> = (props) => {
             return state.usersstate.users.byId
         }
     );
+    const subscriptions = useSelector<IStateInterface, IStateInterface['subscriptionsstate']["subscriptions"]["byId"]>(
+        (state) => {
+            return state.subscriptionsstate.subscriptions.byId
+        }
+    );
     const postElements = posts.map((post) => {
-        let userSubscriptions = users.filter(user => user.name === signedUser)[0].subscriptions;
+        let userSubscriptions = subscriptions.filter(subscription => subscription.subscribedPerson === signedUser).map(subscription=>subscription.subscribedTo);
         if (showAllPosts) {
             return <Post post={post} signedUserID={signedUserID} showUserProfile={showUserProfile} key={Math.random()}/>
         } else if (userSubscriptions.includes(post.author)) {
