@@ -72,7 +72,7 @@ export const Profile: React.FC<IProfileInterface> = (props) => {
     const onClose = () => {
         setSubscriptions([])
     }
-    const isSubscribed = subscribedTo(signedUserID).includes(getIdByName(userOfProfile, users))
+    const isSubscribed = subscribedTo(signedUserID).includes(userOfProfile)
 
     if (subscriptions.length > 0) {
         return <SubscriptionList subscriptions={subscriptions} onClose={onClose}/>
