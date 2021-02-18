@@ -1,0 +1,47 @@
+.signup {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 25%;
+  width: 40%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -12%;
+  margin-left: -20%;
+  min-width: fit-content;
+
+  &-welcome {
+    font-size: 3em;
+    font-weight: bold;
+    color: aliceblue;
+    min-width: fit-content;
+
+  }
+
+  &-submit {
+    font-size: 1.2em;
+    color: aliceblue;
+    height: fit-content;
+    cursor: pointer;
+    min-width: fit-content;
+    border: none;
+
+    &:enabled {
+      background-color: hotpink;
+    }
+  }
+
+  &-text {
+    border: none;
+      &:focus{
+          outline-color: hotpink;
+          outline-style: dashed;
+          outline-width: thin;
+      }
+  }
+}
+
+
+
