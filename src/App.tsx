@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './App.css';
+import './App.scss'
 import {Signup} from "./components/signup/Signup";
 import {Posts} from './components/posts/Posts';
 import {UserModel} from "./model/UserModel";
