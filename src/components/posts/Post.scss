@@ -1,0 +1,15 @@
+.post{
+  border: 1px dotted lightslategray;
+  margin: 10px;
+  &-authorname{
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 1px 1px 0px #eb2be8,
+    2px 2px 0px #cabee3,
+  }
+  &-body{
+    color: #fff;
+    font-style: oblique;
+  }
+}

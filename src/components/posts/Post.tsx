@@ -6,7 +6,7 @@ import {IPost} from "../../reducers/postsReducer";
 import {getNameById} from "../../utils/getNameById";
 import {LikeModel} from "../../model/LikeModel";
 import {addLike, addLikesIds, deleteLike} from "../../actions/likeAction";
-
+import './Post.scss'
 
 export const Post: React.FC<IPostInterface> = (props) => {
     const dispatch = useDispatch();
@@ -38,24 +38,26 @@ export const Post: React.FC<IPostInterface> = (props) => {
     }
 
     return (
-        <div className='posts-post card'>
-            <h3 className='card-title text-left' onClick={() => showUserProfile(authorName)}> {authorName}</h3>
-            <h4 className='card-text text-left'> {post.body}</h4>
-            <span> Liked by:
+        <div className='post'>
+            <h3 className='post-authorname' onClick={() => showUserProfile(authorName)}> {authorName}</h3>
+            <h4 className='post-body'> {post.body}</h4>
+            <span className='post-liketext'> Liked by:
                 {
                     likes.map(likeObject => {
                         if (likeObject.likedPost === post.id) {
                             let userLikeName = getNameById(likeObject.likedUser, users)
-                            return <a href='#' onClick={() => showUserProfile(userLikeName)}
+                            return <a className='post-likename' href='#' onClick={() => showUserProfile(userLikeName)}
                                       key={userLikeName}> {userLikeName} </a>
                         }
                     })
                 }
             </span>
-            <button onClick={() => {
+            <button className='post-likebutton' onClick={() => {
                 onLike(post, signedUserID, liked);
                 setLiked(!liked)
-            }}>❤ </button>
+            }}>
+                ❤
+            </button>
         </div>
     )
 };
