@@ -1,0 +1,59 @@
+.posts{
+  margin: 0 auto;
+  width: fit-content;
+ &-welcometext{
+   text-align: center;
+   color: mix(#fff, #e91e63, 85%);
+   font-size: calc(1em + 3vw) ;
+   font-weight: 900;
+   text-shadow:
+           -0.0075em 0.0075em 0 mix(#fff, #e91e63, 94%),
+           0.005em 0.005em 0 mix(#fff, #e91e63, 60%),
+           0.01em 0.01em 0 mix(#fff, #e91e63, 62%),
+           0.015em 0.015em mix(#fff, #e91e63, 64%),
+           0.02em 0.02em 0 mix(#fff, #e91e63, 66%),
+           0.025em 0.025em 0 mix(#fff, #e91e63, 68%),
+           0.03em 0.03em 0 mix(#fff, #e91e63, 70%),
+           0.035em 0.035em 0 mix(#fff, #e91e63, 72%);
+ }
+  &-postbutton{
+    color: deeppink;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 2px 14px 15px pink;
+    border: none;
+    &:active{
+      outline: none;
+    }
+  }
+  &-toprofile{
+    &:hover{
+    transition: 0.3s;
+    transform: scale(1.1);
+    text-shadow: 1px -1px 0 grey, 1px -2px 0 grey, 1px -3px 0 grey,
+    1px -4px 0 grey, 1px -5px 0 grey, 1px -6px 0 grey, 1px -7px 0 grey,
+    1px -8px 0 grey, 5px -13px 15px black, 5px -13px 25px #808080;
+      text-decoration: none;
+  }
+
+    &__text{
+      color: darkgrey;
+      text-align: center;
+      font-size: 2em;
+      font-family: sans-serif;
+      transition: 0.3s;
+      text-shadow: 1px 1px 0 deeppink, 1px 2px 0 grey, 1px 3px 0 grey, 1px 4px 0 grey;
+      &:hover{
+        transition: 0.3s;
+        transform: scale(1.1);
+        text-shadow: 1px -1px 0 grey, 1px -2px 0 grey, 1px -3px 0 deeppink;
+
+
+      }
+    }
+
+  }
+}

@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {Profile} from "../profile/Profile";
 import {useSelector} from "react-redux";
 import {IStateInterface} from "../../store/store";
+import './Posts.scss'
 
 export const Posts: React.FC<IPostsInterface> = (props) => {
     const {signedUser, signedUserID, userOfProfile, showUserProfile, unsign} = props;
@@ -33,18 +34,20 @@ export const Posts: React.FC<IPostsInterface> = (props) => {
     switch (userOfProfile === '') {
         case true:
             return (
-                <div className='posts card-body text-center col-sm-3'>
-                    <p className="card-text card-header"
+                <div className='posts'>
+                    <p className="posts-welcometext"
                        onClick={() => showUserProfile(signedUser)}> Hello {signedUser}!</p>
-                    <button className="btn btn-outline-primary" onClick={() => setShowAllPosts(true)}>
+                    <button className="posts-postbutton" onClick={() => setShowAllPosts(true)}>
                         All posts
                     </button>
-                    <button className="btn btn-outline-primary" onClick={() => setShowAllPosts(false)}>
+                    <button className="posts-postbutton" onClick={() => setShowAllPosts(false)}>
                         Subscriptions
                     </button>
                     {postElements}
-                    <Link to="/profile">
-                        To profile
+                    <Link className="posts-toprofile" to="/profile">
+                       <p className="posts-toprofile__text">
+                           To profile
+                       </p>
                     </Link>
                 </div>
             );
